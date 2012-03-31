@@ -17,22 +17,18 @@ class EventManager
 
   def print_numbers
   	@file.each do |line|
-  		number = line[:homephone]
-        if number.length == 10
-          # Do Nothing
-        elsif number.length == 11
-          if number.start_with?("1")
-            number = number[1..-1]
-          else
-            number = "0000000000"
-          end
-        else
-          number = "0000000000"
-        end
-  		clean_number = number.delete("-")
-  		puts clean_number
-      puts number
-	end
+      number = clean_number(line[:homephone])
+    end
+
+  end
+
+  def clean_number(original)
+    @file.each do |line|
+      number = line[:homephone]
+      clean_number = number.delete("-")
+      puts clean_number
+    end
+    return self
   end
 end
 
@@ -40,4 +36,3 @@ end
 manager = EventManager.new
 # manager.print_names
 manager.print_numbers
-
